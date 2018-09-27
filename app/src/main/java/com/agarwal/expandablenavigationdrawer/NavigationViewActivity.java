@@ -11,6 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,23 +30,27 @@ public class NavigationViewActivity extends AppCompatActivity {
     ExpandableListView expandableList;
     List<ExpandedMenuModel> listDataHeader;
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
+    private ArrayList<String> cities_name=new ArrayList<String>();
+    String url = "https://rajasthantoursim.000webhostapp.com/city_details.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_view);
+
         final ActionBar ab = getSupportActionBar();
-        /* to set the menu icon image*/
-        ab.setHomeAsUpIndicator(android.R.drawable.ic_menu_add);
+
+        ab.setHomeAsUpIndicator(R.drawable.ic_format_list_bulleted_black_24dp);
         ab.setDisplayHomeAsUpEnabled(true);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        mDrawerLayout =  findViewById(R.id.drawer_layout);
+        expandableList =  findViewById(R.id.navigationmenu);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
 
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-
 
         prepareListData();
 
@@ -57,6 +70,7 @@ public class NavigationViewActivity extends AppCompatActivity {
                 return false;
             }
         });
+        getCitiesList();
     }
 
     private void prepareListData() {
@@ -64,33 +78,45 @@ public class NavigationViewActivity extends AppCompatActivity {
         listDataChild = new HashMap<ExpandedMenuModel, List<String>>();
 
         ExpandedMenuModel item1 = new ExpandedMenuModel();
-        item1.setIconName("heading1");
+        item1.setIconName("Top Visiting Places");
         item1.setIconImg(android.R.drawable.ic_delete);
         // Adding data header
         listDataHeader.add(item1);
 
         ExpandedMenuModel item2 = new ExpandedMenuModel();
-        item2.setIconName("heading2");
-        item2.setIconImg(android.R.drawable.ic_delete);
+        item2.setIconName("Cities");
+        item2.setIconImg(R.drawable.ic_cities);
         listDataHeader.add(item2);
 
         ExpandedMenuModel item3 = new ExpandedMenuModel();
-        item3.setIconName("heading3");
+        item3.setIconName("Temples");
         item3.setIconImg(android.R.drawable.ic_delete);
         listDataHeader.add(item3);
 
-        // Adding child data
-        List<String> heading1 = new ArrayList<String>();
-        heading1.add("Submenu of item 1");
+        listDataChild.put(listDataHeader.get(1), cities_name);
+    }
 
-        List<String> heading2 = new ArrayList<String>();
-        heading2.add("Submenu of item 2");
-        heading2.add("Submenu of item 2");
-        heading2.add("Submenu of item 2");
-
-        listDataChild.put(listDataHeader.get(0), heading1);// Header, Child data
-        listDataChild.put(listDataHeader.get(1), heading2);
-
+    private void getCitiesList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    int length = jsonArray.length();
+                    for(int i=0; i<length; i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        cities_name.add(jsonObject.getString("name"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     @Override
