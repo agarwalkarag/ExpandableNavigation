@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -79,7 +81,7 @@ public class NavigationViewActivity extends AppCompatActivity {
 
         ExpandedMenuModel item1 = new ExpandedMenuModel();
         item1.setIconName("Top Visiting Places");
-        item1.setIconImg(android.R.drawable.ic_delete);
+        item1.setIconImg(R.drawable.ic_top_places);
         // Adding data header
         listDataHeader.add(item1);
 
@@ -90,7 +92,7 @@ public class NavigationViewActivity extends AppCompatActivity {
 
         ExpandedMenuModel item3 = new ExpandedMenuModel();
         item3.setIconName("Temples");
-        item3.setIconImg(android.R.drawable.ic_delete);
+        item3.setIconImg(R.drawable.ic_temples);
         listDataHeader.add(item3);
 
         listDataChild.put(listDataHeader.get(1), cities_name);
@@ -145,5 +147,12 @@ public class NavigationViewActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    public void navigateCity(View view) {
+        int id = view.getId();
+        TextView textView = findViewById(id);
+        String str = textView.getText().toString().trim();
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 }

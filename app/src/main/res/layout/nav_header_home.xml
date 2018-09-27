@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:scaleType="centerCrop"
-        android:src="@drawable/navuser_black"
+        android:src="@drawable/launcher"
         app:civ_border_color="#000000"
         app:civ_border_width="2dp" />
 
@@ -31,6 +31,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20sp"
         android:text="Rajasthan Tourism"
+        android:fontFamily="@font/muli_bold"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textStyle="bold" />
