@@ -38,7 +38,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         int childCount = 0;
-        if (groupPosition != 2) {
+        if (groupPosition == 1) {
             childCount = this.mListDataChild.get(this.mListDataHeader.get(groupPosition)).size();
         }
         return childCount;
@@ -79,14 +79,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.submenu);
         ImageView headerIcon = (ImageView) convertView.findViewById(R.id.iconimage);
+        ImageView indicator = (ImageView) convertView.findViewById(R.id.indicator);
         lblListHeader.setText(headerTitle.getIconName());
         headerIcon.setImageResource(headerTitle.getIconImg());
+        indicator.setImageResource(headerTitle.getIndicator());
 
-//        if (isExpanded) {
-//            groupHolder.img.setImageResource(R.drawable.ic_group_down);
-//        } else {
-//            groupHolder.img.setImageResource(R.drawable.ic_group_up);
-//        }
+        if (isExpanded && getChildrenCount(groupPosition)!=0) {
+            indicator.setImageResource(R.drawable.ic_expand_less);
+        } else {
+            indicator.setImageResource(headerTitle.getIndicator());
+        }
 
         return convertView;
     }

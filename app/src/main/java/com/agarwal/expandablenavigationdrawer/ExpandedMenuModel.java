@@ -1,9 +1,20 @@
 package com.agarwal.expandablenavigationdrawer;
 
+import android.graphics.drawable.Drawable;
+
 public class ExpandedMenuModel {
 
     String iconName = "";
     int iconImg = -1; // menu icon resource id
+   int indicator = -1;
+
+    public int getIndicator() {
+        return indicator;
+    }
+
+    public void setIndicator(int indicator) {
+        this.indicator = indicator;
+    }
 
     public String getIconName() {
         return iconName;

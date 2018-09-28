@@ -1,5 +1,6 @@
 package com.agarwal.expandablenavigationdrawer;
 
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -82,17 +83,20 @@ public class NavigationViewActivity extends AppCompatActivity {
         ExpandedMenuModel item1 = new ExpandedMenuModel();
         item1.setIconName("Top Visiting Places");
         item1.setIconImg(R.drawable.ic_top_places);
+        item1.setIndicator(Color.TRANSPARENT);
         // Adding data header
         listDataHeader.add(item1);
 
         ExpandedMenuModel item2 = new ExpandedMenuModel();
         item2.setIconName("Cities");
         item2.setIconImg(R.drawable.ic_cities);
+        item2.setIndicator(R.drawable.ic_expand_more);
         listDataHeader.add(item2);
 
         ExpandedMenuModel item3 = new ExpandedMenuModel();
         item3.setIconName("Temples");
         item3.setIconImg(R.drawable.ic_temples);
+        item3.setIndicator(Color.TRANSPARENT);
         listDataHeader.add(item3);
 
         listDataChild.put(listDataHeader.get(1), cities_name);

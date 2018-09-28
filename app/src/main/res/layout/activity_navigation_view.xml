@@ -22,8 +22,8 @@
 
         <ExpandableListView
             android:id="@+id/navigationmenu"
-            android:layout_width="wrap_content"
-
+            android:layout_width="match_parent"
+            android:groupIndicator="@null"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/nav_header_height"
             android:background="@android:color/white">
