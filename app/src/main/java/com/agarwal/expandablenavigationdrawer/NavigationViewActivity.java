@@ -99,6 +99,37 @@ public class NavigationViewActivity extends AppCompatActivity {
         item3.setIndicator(Color.TRANSPARENT);
         listDataHeader.add(item3);
 
+
+        ExpandedMenuModel item4 = new ExpandedMenuModel();
+        item4.setIconName("Heritage & Places");
+        item4.setIconImg(R.drawable.ic_heritage);
+        item4.setIndicator(Color.TRANSPARENT);
+        listDataHeader.add(item4);
+
+        ExpandedMenuModel item5 = new ExpandedMenuModel();
+        item5.setIconName("Favourites");
+        item5.setIconImg(R.drawable.ic_favorite);
+        item5.setIndicator(Color.TRANSPARENT);
+        listDataHeader.add(item5);
+
+        ExpandedMenuModel item6 = new ExpandedMenuModel();
+        item6.setIconName("Share");
+        item6.setIconImg(R.drawable.ic_share);
+        item6.setIndicator(Color.TRANSPARENT);
+        listDataHeader.add(item6);
+
+        ExpandedMenuModel item7 = new ExpandedMenuModel();
+        item7.setIconName("About Us");
+        item7.setIconImg(R.drawable.ic_about);
+        item7.setIndicator(Color.TRANSPARENT);
+        listDataHeader.add(item7);
+
+        ExpandedMenuModel item8 = new ExpandedMenuModel();
+        item8.setIconName("Terms & Conditions");
+        item8.setIconImg(R.drawable.ic_terms);
+        item8.setIndicator(Color.TRANSPARENT);
+        listDataHeader.add(item8);
+
         listDataChild.put(listDataHeader.get(1), cities_name);
     }
 
